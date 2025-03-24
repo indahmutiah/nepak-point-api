@@ -6,7 +6,7 @@ const app = new Hono();
 app.get("/", (c) => {
   return c.json({
     message:
-      " Hi! 👋 This is a REST API for Dexeption's e-commerce personal project.",
+      " Hi! 👋 This is a REST API for Nepak Point's e-commerce personal project.",
   });
 });
 

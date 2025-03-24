@@ -1,10 +1,10 @@
-# Dexeption Muv API
+# Nepak Point API
 
-Dexeption Muv API is the backend of Dexeption's e-commerce personal project.
+Nepak Point API is the backend of Nepak Point's e-commerce personal project.
 
 ## REST API Specification
 
-- Production: `https://dexeption-muv-api.indahmutiah.com`
+- Production: `https://nepak-point-api.indahmutiah.com`
 - Local: `http://localhost:3000`
 
 Products:

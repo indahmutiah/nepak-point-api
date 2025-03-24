@@ -1,5 +1,5 @@
 {
-  "name": "dexeption-muv-api",
+  "name": "nepak-point-api",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "build": "bun install && bun db:migrate:deploy && bun db:gen",
