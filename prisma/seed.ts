@@ -4,14 +4,24 @@ const prisma = new PrismaClient();
 import { dataProducts } from "@/data/product";
 
 async function main() {
+  // TODO: for loop to seed categories
+
   for (const product of dataProducts) {
+    const { categorySlug, ...productData } = product;
+
     const resultproduct = await prisma.product.upsert({
       where: { slug: product.slug },
-      update: product,
-      create: product,
+      update: {
+        ...productData,
+        category: { connect: { slug: categorySlug } },
+      },
+      create: {
+        ...productData,
+        category: { connect: { slug: categorySlug } },
+      },
     });
 
-    console.log(`product: ${resultproduct.name}`);
+    console.log(`🎾 Product: ${resultproduct.name}`);
   }
 }
 main()
