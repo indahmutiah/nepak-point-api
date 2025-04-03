@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { productRoutes } from "@/routes/product";
+import { categoryRoutes } from "@/routes/category";
 
 const app = new Hono();
 
@@ -10,6 +11,7 @@ app.get("/", (c) => {
   });
 });
 
-app.route("/api/products", productRoutes);
+app.route("/products", productRoutes);
+app.route("/categories", categoryRoutes);
 
 export default app;
