@@ -7,17 +7,25 @@ export const categoryRoutes = app;
 
 // Get all categories
 app.get("/", async (c) => {
-  const categories = await prisma.category.findMany();
-  const totalCount = await prisma.category.count();
+  const [categories, totalCount] = await Promise.all([
+    prisma.category.findMany({
+      include: {
+        products: true,
+      },
+    }),
+    prisma.category.count(),
+  ]);
+
   return c.json({
     total: totalCount,
     data: categories,
   });
 });
 
+// Get category by slug
 app.get("/:slug", async (c) => {
   const slug = c.req.param("slug");
-  const resultCategory = await prisma.category.findUnique({
+  const category = await prisma.category.findUnique({
     where: {
       slug: slug.toLowerCase(),
     },
@@ -31,11 +39,11 @@ app.get("/:slug", async (c) => {
     },
   });
 
-  if (!resultCategory) {
+  if (!category) {
     return c.json({ Message: "Category not found" }, 404);
   }
   return c.json({
     total: totalCount,
-    data: resultCategory,
+    data: category,
   });
 });
