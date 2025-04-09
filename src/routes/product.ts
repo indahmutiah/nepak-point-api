@@ -3,6 +3,7 @@ import { cors } from "hono/cors";
 import { createRoute } from "@hono/zod-openapi";
 import { ProductsSchema } from "@/modules/product/schema";
 import { OpenAPIHono } from "@hono/zod-openapi";
+import { z } from "@hono/zod-openapi";
 
 const app = new OpenAPIHono();
 
@@ -38,52 +39,52 @@ app.openapi(
 );
 
 // Get products by search
-// app.openapi(
-//   createRoute({
-//     method: "get",
-//     path: "/products/search",
-//     description: "Get all products by search",
-//     request: {
-//       query: z.object({
-//         q: z.string().optional().describe("Search query"),
-//       }),
-//     },
-//     responses: {
-//       200: {
-//         content: {
-//           "application/json": {
-//             schema: z.object({
-//               total: z.number().describe("Total number of products"),
-//               data: ProductsSchema,
-//             }),
-//           },
-//         },
-//         description: "Search Results",
-//       },
-//     },
-//   }),
-//   async (c) => {
-//     try {
-//       const q = c.req.query("q");
-//       const [products, totalCount] = await Promise.all([
-//         prisma.product.findMany({
-//           where: q ? { name: { contains: q, mode: "insensitive" } } : {},
-//           include: { category: true },
-//         }),
-//         prisma.product.count({
-//           where: q ? { name: { contains: q, mode: "insensitive" } } : {},
-//         }),
-//       ]);
+app.openapi(
+  createRoute({
+    method: "get",
+    path: "/search",
+    description: "Get all products by search",
+    request: {
+      query: z.object({
+        q: z.string().optional().describe("Search query"),
+      }),
+    },
+    responses: {
+      200: {
+        content: {
+          "application/json": {
+            schema: z.object({
+              total: z.number().describe("Total number of products"),
+              data: ProductsSchema,
+            }),
+          },
+        },
+        description: "Search Results",
+      },
+    },
+  }),
+  async (c) => {
+    try {
+      const q = c.req.query("q");
+      const [products, totalCount] = await Promise.all([
+        prisma.product.findMany({
+          where: q ? { name: { contains: q, mode: "insensitive" } } : {},
+          include: { category: true },
+        }),
+        prisma.product.count({
+          where: q ? { name: { contains: q, mode: "insensitive" } } : {},
+        }),
+      ]);
 
-//       return c.json({
-//         total: totalCount,
-//         data: products,
-//       });
-//     } catch (error) {
-//       throw new Error("Failed to search products");
-//     }
-//   }
-// );
+      return c.json({
+        total: totalCount,
+        data: products,
+      });
+    } catch (error) {
+      throw new Error("Failed to search products");
+    }
+  }
+);
 
 // Get product by slug
 // app.openapi(
@@ -100,47 +101,39 @@ app.openapi(
 //       200: {
 //         content: {
 //           "application/json": {
-//             schema: ProductResponseSchema,
+//             schema: ProductsSchema,
 //           },
 //         },
 //         description: "Successfully Get Product by Slug",
 //       },
-//       404: {
-//         content: {
-//           "application/json": {
-//             schema: ProductNotFoundSchema,
-//           },
-//         },
-//         description: "Product not found",
-//       },
 //     },
 //   }),
 //   async (c) => {
-//     const {slug } = c.req.valid(`param`);
-//     const [product, totalCount] = await Promise.all([
-//       prisma.product.findUnique({
-//         where: {
-//           slug: slug.toLowerCase(),
-//         },
-//         include: {
-//           category: true,
-//         },
-//       }),
-//       prisma.product.count({
-//         where: {
-//           slug: slug.toLowerCase(),
-//         },
-//       }),
-//     ]);
+//     const { slug } = c.req.valid(`param`);
+//     const product = await prisma.product.findUnique({
+//       where: {
+//         slug: slug.toLowerCase(),
+//       },
+//       include: { category: true },
+//     });
 
-//     if (!product) {
-//       return c.json({ message: "Product not found" as const }, 404);
+//     if (product) {
+//       const formattedProduct = {
+//         ...product,
+//         createdAt: product.createdAt.toISOString(),
+//         updateAt: product.updateAt.toISOString(),
+//         category: product.category
+//           ? {
+//               ...product.category,
+//               createdAt: product.category.createdAt.toISOString(),
+//               updateAt: product.category.updateAt.toISOString(),
+//             }
+//           : null,
+//       };
+//       return c.json(formattedProduct);
 //     }
 
-//     return c.json({
-//       total: totalCount,
-//       data: product,
-//     });
+//     return c.json(null);
 //   }
 // );
 
