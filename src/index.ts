@@ -4,18 +4,13 @@ import { OpenAPIHono } from "@hono/zod-openapi";
 import { Scalar } from "@scalar/hono-api-reference";
 import { cors } from "hono/cors";
 
-const app = new OpenAPIHono(); // Use OpenAPIHono for OpenAPI support
+const app = new OpenAPIHono();
+
 app.use(cors());
 
-// Root endpoint
-app.get("/", (c) => {
-  return c.json({
-    message:
-      "Hi! 👋 This is a REST API for Nepak Point's e-commerce personal project.",
-  });
-});
+app.route("/products", productRoutes);
+app.route("/categories", categoryRoutes);
 
-// OpenAPI documentation for the entire API
 app.doc("/openapi.json", {
   openapi: "3.0.0",
   info: {
@@ -24,10 +19,6 @@ app.doc("/openapi.json", {
   },
 });
 
-app.route("/products", productRoutes);
-app.route("/categories", categoryRoutes);
-
-// Swagger UI for OpenAPI documentation
-app.get("/docs", Scalar({ url: "/openapi.json" }));
+app.get("/", Scalar({ url: "/openapi.json" }));
 
 export default app;
