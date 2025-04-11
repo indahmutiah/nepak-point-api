@@ -1,3 +1,5 @@
+import { html } from "hono/html";
+
 type SeedProduct = {
   name: string;
   slug: string;
@@ -24,22 +26,35 @@ export const dataProducts: SeedProduct[] = [
     name: "Decathlon Kok Bulu FSC 930 Speed 77 X 12",
     slug: "decathlon-kok-bulu-fsc-930-speed-77-x-12",
     series: "Decathlon Kok Bulu FSC 930",
-    description:
-      "Decathlon Kok Bulu FSC 930 Speed 77 X 12 merupakan kok bulu yang terbuat dari bulu angsa yang berkualitas tinggi. Kok bulu ini memiliki kecepatan 77 dan terdiri dari 12 buah kok bulu. Ideal digunakan untuk kompetisi dan latihan performa tinggi.",
+    description: ` 
+    <p>
+      Decathlon Kok Bulu FSC 930 Speed 77 X 12 merupakan kok bulu yang terbuat
+      dari bulu angsa yang berkualitas tinggi. Kok bulu ini memiliki kecepatan
+      77 dan terdiri dari 12 buah kok bulu. Ideal digunakan untuk kompetisi dan
+      latihan performa tinggi.
+    </p>`,
     price: 549000,
     imageUrl:
-      "https://ucarecdn.com/3923ce55-fb95-44cf-8256-eb5bea1eca4e/kokbulufsc930kecepatan77x12perfly8490816.jpg",
+      "https://ucarecdn.com/3923ce55-fb95-44cf-8256-eb5bea1eca4e/-/preview/800x800/",
     categorySlug: "accessories",
   },
   {
     name: "Kickstart Men's Badminton Shoes - Off White",
     slug: "kickstart-mens-badminton-shoes-off-white",
     series: "Kickstart Men's Badminton Shoes",
-    description:
-      "Sepatu ini dirancang untuk bergaya, nyaman, dan meningkatkan permainan. Sepatu ini memiliki kombinasi kulit sintetis & kain rajut / bagian atas mesh yang dapat bernapas, midsole yang empuk dengan penopang serat karbon, dan sol luar dari karet non-marking yang memberikan daya cengkeram dan stabilitas. Dengan sepatu badminton Astec, Anda dapat tampil dan terlihat memukau di lapangan!",
+    description: `
+      <p>
+        Sepatu ini dirancang untuk bergaya, nyaman, dan meningkatkan permainan.
+        Sepatu ini memiliki kombinasi kulit sintetis & kain rajut / bagian atas
+        mesh yang dapat bernapas, midsole yang empuk dengan penopang serat
+        karbon, dan sol luar dari karet non-marking yang memberikan daya
+        cengkeram dan stabilitas. Dengan sepatu badminton Astec, Anda dapat
+        tampil dan terlihat memukau di lapangan!
+      </p>
+    `,
     price: 599000,
     categorySlug: "shoes",
     imageUrl:
-      "https://ucarecdn.com/da7bfb2b-1ae0-4f31-8671-a47681426c4e/01ASTECF34IDASCAASCFWM4FB2WHWhite.jpg",
+      "https://ucarecdn.com/da7bfb2b-1ae0-4f31-8671-a47681426c4e/-/preview/800x800/",
   },
 ];
