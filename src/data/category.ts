@@ -13,11 +13,7 @@ export const dataCategories: SeedCategory[] = [
     slug: "accessories",
   },
   {
-    name: "Shoes",
-    slug: "shoes",
-  },
-  {
-    name: "Tshirt",
-    slug: "tshirt",
+    name: "Shuttlecock",
+    slug: "shuttlecock",
   },
 ];
