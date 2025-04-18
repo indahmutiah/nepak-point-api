@@ -107,7 +107,7 @@ export const dataProducts: SeedProduct[] = [
       </ul>`,
     price: 49800,
     imageUrl:
-      "https://ucarecdn.com/0f1a2b3c-4d5e-4f6a-7b8c-9d0e1f2a3b4c/-/preview/500x500/",
+      "https://ucarecdn.com/4128d118-afbd-43fa-93b3-f9a40049d898/-/preview/500x500/",
     categorySlug: "accessories",
   },
   {
@@ -127,7 +127,7 @@ export const dataProducts: SeedProduct[] = [
       </ul>`,
     price: 400000,
     imageUrl:
-      "https://ucarecdn.com/4f5a6b7c-8d9e-4e0f-8a2b-3c4d5e6f7g8h/-/preview/500x500/",
+      "https://ucarecdn.com/609c072a-2791-4f13-a775-2c59c12f122c/-/preview/500x500/",
     categorySlug: "shuttlecock",
   },
 ];
