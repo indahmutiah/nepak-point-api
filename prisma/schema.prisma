@@ -7,6 +7,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id String @id @default(ulid())
+
+  email    String    @unique
+  password Password?
+  name     String?   @db.VarChar(255)
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model Password {
+  id String @id @default(ulid())
+
+  hash String
+
+  user   User   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId String @unique
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
 model Product {
   id String @id @default(ulid())
 
@@ -15,6 +38,7 @@ model Product {
   series      String?
   description String?
   price       Int
+  stock       Int?
   imageUrl    String
 
   category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull, onUpdate: Cascade)

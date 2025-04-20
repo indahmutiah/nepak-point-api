@@ -6,6 +6,7 @@ type SeedProduct = {
   series: string;
   description: string;
   price: number;
+  stock: number;
   imageUrl: string;
   categorySlug: string;
 };
@@ -18,6 +19,7 @@ export const dataProducts: SeedProduct[] = [
     description:
       "Flypower Tornado 800 Raket Badminton - Black Red Free Tas Bonus 2R + Kaos",
     price: 1000000,
+    stock: 10,
     imageUrl:
       "https://ucarecdn.com/3e88446d-e811-455d-9dc0-4d07aea2a026/-/preview/500x500/",
     categorySlug: "racket",
@@ -34,6 +36,7 @@ export const dataProducts: SeedProduct[] = [
       latihan performa tinggi.
     </p>`,
     price: 549000,
+    stock: 10,
     imageUrl:
       "https://ucarecdn.com/3923ce55-fb95-44cf-8256-eb5bea1eca4e/-/preview/800x800/",
     categorySlug: "shuttlecock",
@@ -45,6 +48,7 @@ export const dataProducts: SeedProduct[] = [
     description:
       "Yonex Raket Badminton Astrox 99 Pro merupakan raket badminton yang dirancang untuk meningkatkan kekuatan dan kecepatan permainan Anda. Dengan teknologi terbaru dari Yonex, raket ini memberikan performa yang optimal di lapangan.",
     price: 3500000,
+    stock: 10,
     imageUrl:
       "https://ucarecdn.com/1df4e864-e75d-41d6-8b68-921aaf03d47b/-/preview/500x500/",
     categorySlug: "racket",
@@ -60,6 +64,7 @@ export const dataProducts: SeedProduct[] = [
       ini memberikan lingkaran yang sangat kuat dan mudah digunakan. Diperuntukkan untuk pemain profesional.
     </p>`,
     price: 1000000,
+    stock: 10,
     imageUrl:
       "https://ucarecdn.com/a2c67453-392d-4010-82e2-a93805e9247f/-/preview/500x500/",
     categorySlug: "racket",
@@ -83,6 +88,7 @@ export const dataProducts: SeedProduct[] = [
       </ul>
     `,
     price: 105000,
+    stock: 10,
     imageUrl:
       "https://ucarecdn.com/30226baa-6575-4b52-8a2f-d1efbbe1c3c3/-/preview/500x500/",
     categorySlug: "accessories",
@@ -106,6 +112,7 @@ export const dataProducts: SeedProduct[] = [
         <li>Using for: Professional / Senior</li>
       </ul>`,
     price: 49800,
+    stock: 10,
     imageUrl:
       "https://ucarecdn.com/4128d118-afbd-43fa-93b3-f9a40049d898/-/preview/500x500/",
     categorySlug: "accessories",
@@ -126,6 +133,7 @@ export const dataProducts: SeedProduct[] = [
         <li>Quantity: 12 pieces</li>
       </ul>`,
     price: 400000,
+    stock: 10,
     imageUrl:
       "https://ucarecdn.com/609c072a-2791-4f13-a775-2c59c12f122c/-/preview/500x500/",
     categorySlug: "shuttlecock",

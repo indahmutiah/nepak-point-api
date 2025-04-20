@@ -1,9 +1,7 @@
 import { prisma } from "@/lib/prisma";
-import { cors } from "hono/cors";
 import { createRoute } from "@hono/zod-openapi";
 import { ProductsSchema, ProductSchema } from "@/modules/product/schema";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { z } from "@hono/zod-openapi";
 import { QuerySchema, ParamSlugSchema } from "@/modules/common/schema";
 
 const app = new OpenAPIHono();
@@ -31,8 +29,6 @@ app.openapi(
     const products = await prisma.product.findMany();
     const formattedProducts = products.map((product) => ({
       ...product,
-      createdAt: product.createdAt.toISOString(),
-      updateAt: product.updateAt.toISOString(),
     }));
     return c.json(formattedProducts);
   }
