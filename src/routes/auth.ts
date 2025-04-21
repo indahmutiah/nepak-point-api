@@ -1,11 +1,14 @@
 import { hashPassword, verifyPassword } from "@/lib/password";
 import { prisma } from "@/lib/prisma";
 import { generateToken } from "@/lib/token";
+import { checkAuthorized } from "@/modules/auth/middleware";
 import {
   LoginResponseSchema,
   LoginUserSchema,
   RegisterUserSchema,
-  UserSchema,
+  PrivateUserSchema,
+  PublicUsersSchema,
+  PublicUserSchema,
 } from "@/modules/user/schema";
 import { createRoute, OpenAPIHono } from "@hono/zod-openapi";
 import { z } from "@hono/zod-openapi";
@@ -25,7 +28,7 @@ authRoutes.openapi(
     },
     responses: {
       200: {
-        content: { "application/json": { schema: UserSchema } },
+        content: { "application/json": { schema: PublicUserSchema } },
         description: "Successfully registered user",
       },
     },
@@ -92,5 +95,26 @@ authRoutes.openapi(
     return c.json({
       token,
     });
+  }
+);
+
+// Get /auth/me
+authRoutes.openapi(
+  createRoute({
+    method: "get",
+    path: "/me",
+    description: "Get user info",
+    middleware: checkAuthorized,
+    responses: {
+      200: {
+        content: { "application/json": { schema: PrivateUserSchema } },
+        description: "Get User Info",
+      },
+    },
+  }),
+  async (c) => {
+    const user = c.get("user");
+
+    return c.json(user);
   }
 );

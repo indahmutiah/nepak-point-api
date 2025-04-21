@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { createRoute, OpenAPIHono } from "@hono/zod-openapi";
-import { UsersSchema, UserSchema } from "@/modules/user/schema";
+import { PublicUsersSchema, PrivateUserSchema } from "@/modules/user/schema";
 import { z } from "@hono/zod-openapi";
 
 export const usersRoutes = new OpenAPIHono();
@@ -12,7 +12,7 @@ usersRoutes.openapi(
     path: "/",
     responses: {
       200: {
-        content: { "application/json": { schema: UsersSchema } },
+        content: { "application/json": { schema: PublicUsersSchema } },
         description: "Get all users",
       },
     },
@@ -34,7 +34,7 @@ usersRoutes.openapi(
     },
     responses: {
       200: {
-        content: { "application/json": { schema: UserSchema } },
+        content: { "application/json": { schema: PrivateUserSchema } },
         description: "Successfully get user by id",
       },
       404: {
