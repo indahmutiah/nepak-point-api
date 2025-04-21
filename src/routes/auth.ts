@@ -1,5 +1,6 @@
 import { hashPassword, verifyPassword } from "@/lib/password";
 import { prisma } from "@/lib/prisma";
+import { generateToken } from "@/lib/token";
 import {
   LoginResponseSchema,
   LoginUserSchema,
@@ -86,10 +87,10 @@ authRoutes.openapi(
       return c.json({ message: "Invalid Password" }, 400);
     }
 
+    const token = generateToken(user.id);
+
     return c.json({
-      isValid,
-      user,
-      token: "",
+      token,
     });
   }
 );
