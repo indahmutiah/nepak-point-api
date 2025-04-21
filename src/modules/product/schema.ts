@@ -11,7 +11,7 @@ export const ProductSchema = z.object({
   imageUrl: z.string(),
   categoryId: z.string().nullable(),
   createdAt: z.date(),
-  updateAt: z.date(),
+  updatedAt: z.date(),
 });
 
 export const ProductsSchema = z.array(ProductSchema);

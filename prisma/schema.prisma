@@ -15,7 +15,7 @@ model User {
   name     String?   @db.VarChar(255)
 
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 }
 
 model Password {
@@ -27,7 +27,7 @@ model Password {
   userId String @unique
 
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 }
 
 model Product {
@@ -45,7 +45,7 @@ model Product {
   categoryId String?
 
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 }
 
 model Category {
@@ -57,5 +57,5 @@ model Category {
   products Product[]
 
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 }

@@ -27,10 +27,7 @@ app.openapi(
   }),
   async (c) => {
     const products = await prisma.product.findMany();
-    const formattedProducts = products.map((product) => ({
-      ...product,
-    }));
-    return c.json(formattedProducts);
+    return c.json(products);
   }
 );
 
