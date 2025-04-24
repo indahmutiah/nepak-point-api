@@ -31,22 +31,29 @@ authRoutes.openapi(
         content: { "application/json": { schema: PublicUserSchema } },
         description: "Successfully registered user",
       },
+      400: {
+        description: "Failed to register user",
+      },
     },
   }),
   async (c) => {
-    const body = c.req.valid("json");
+    try {
+      const body = c.req.valid("json");
 
-    const user = await prisma.user.create({
-      data: {
-        email: body.email,
-        password: { create: { hash: await hashPassword(body.password) } },
-        name: body.name,
-      },
-      omit: {
-        email: true,
-      },
-    });
-    return c.json(user);
+      const user = await prisma.user.create({
+        data: {
+          email: body.email,
+          password: { create: { hash: await hashPassword(body.password) } },
+          name: body.name,
+        },
+        omit: {
+          email: true,
+        },
+      });
+      return c.json(user);
+    } catch (error) {
+      return c.json({ message: "Failed to register user", error }, 400);
+    }
   }
 );
 
